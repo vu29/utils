@@ -28,7 +28,7 @@ def create_pdf_file(text,file_name):
 
 def main():
 
-    TOTAL_NO_OF_FILES = 20
+    TOTAL_NO_OF_FILES = 50
     
 
     if not os.path.exists('./pdf_files'):
