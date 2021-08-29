@@ -1,6 +1,7 @@
 import wikipediaapi
 import wikipedia
 from fpdf import FPDF
+import docx
 from tqdm import tqdm
 import os
 
@@ -11,9 +12,9 @@ def create_txt_file(text,file_name):
     file.close()
 
 def create_docx_file(text,file_name):
-    file = open(f'./docx_files/{file_name}.docx','w')
-    file.write(text)
-    file.close()
+    doc = docx.Document()
+    doc.add_paragraph(text)
+    doc.save(f'./docx_files/{file_name}.docx')
 
 def create_pdf_file(text,file_name):
     pdf = FPDF()    
@@ -63,14 +64,15 @@ def main():
         text = text.encode('latin-1', 'replace').decode('latin-1')
 
         if(index%3 == 0):
-            create_docx_file(text,str(index))
+            create_docx_file(text,topics[index])
         elif(index%3 == 1):
-            create_txt_file(text,str(index))
+            create_txt_file(text,topics[index])
         else:
-            create_pdf_file(text,str(index))
+            create_pdf_file(text,topics[index])
             
 
 
 
 if __name__ == '__main__':
     main()
+    
